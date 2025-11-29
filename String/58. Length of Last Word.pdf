@@ -1,0 +1,62 @@
+STRING 
+ 
+Q1 
+58. Length of Last Word 
+Solved Easy 
+Given a string s consisting of words and spaces, return the length of the last word in the string. 
+A word is a maximal substring consisting of non-space characters only. 
+  
+Example 1: 
+Input: s = "Hello World" 
+Output: 5 
+Explanation: The last word is "World" with length 5. 
+Example 2: 
+Input: s = "   fly me   to   the moon  " 
+Output: 4 
+Explanation: The last word is "moon" with length 4. 
+Example 3: 
+Input: s = "luffy is still joyboy" 
+Output: 6 
+Explanation: The last word is "joyboy" with length 6. 
+  
+Constraints: 
+•	1 <= s.length <= 104 
+•	s consists of only English letters and spaces ' '. 
+•	There will be at least one word in s. 
+ 
+ 
+Approach: 
+Create a variable named count and initialize with 0; 
+scan string from behind and  
+if I get  “ “(space) and count is equal to 0 that means string have space\spaces at last so, i ignore that case 
+if loop get  any alphabet --> increment count by 1; 
+if I get  “ “(space) and count is greater than 0 --> return count;  # It means I get the count of last word 
+
+In two cases loop read entire string : i) string is empty 
+ 	 	 	 	                                ii) there is only one word in a string 
+ 
+ i) string is empty --> count is 0 and returned the count;  
+ ii) string have only one word --> count have the length of the word so, return the count; 
+ 
+ 
+Solution: 
+class Solution { public: 
+    int lengthOfLastWord(string s) {         
+              int n = s.length();         
+              int count = 0;         
+              
+              for(int i = n-1;i>=0;i--){             
+                  
+                  if(s[i] >= 'a' && s[i] <= 'z'){                 
+                      count = count + 1; 
+                  } 
+                  if(s[i] >= 'A' && s[i] <= 'Z'){                 
+                      count = count + 1; 
+                  } 
+                  if( s[i] == ' ' && count > 0){                 
+                      break; 
+                  } 
+              } 
+              return count; 
+    } 
+}; 
