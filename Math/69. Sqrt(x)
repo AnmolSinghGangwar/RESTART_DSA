@@ -1,0 +1,62 @@
+69. Sqrt(x)
+Solved
+Given a non-negative integer x, return the square root of x rounded down to the nearest integer. The returned integer should be non-negative as well.
+
+You must not use any built-in exponent function or operator.
+
+For example, do not use pow(x, 0.5) in c++ or x ** 0.5 in python.
+ 
+
+Example 1:
+
+Input: x = 4
+Output: 2
+Explanation: The square root of 4 is 2, so we return 2.
+Example 2:
+
+Input: x = 8
+Output: 2
+Explanation: The square root of 8 is 2.82842..., and since we round it down to the nearest integer, 2 is returned.
+ 
+
+Constraints:
+
+0 <= x <= 231 - 1
+
+Approach:
+create a integer variable named ans in which we store i at which nearest sqrt is
+then, for every interger(from 2) multiply with itself and check:
+                                                                There is three posibility
+                                                                i) multipal is lesser than x : in this case i store i in ans because it can be the nearest integer
+                                                                ii) multipal is greater than x : in this case return ans
+                                                                iii) multipal is equal to x : in this case we get exact sqrt of x , so i return i
+
+Solution:
+class Solution {
+public:
+    int mySqrt(int x) {
+        int ans = 1;
+        
+        if(x == 0)
+            return 0;
+        if(x == 1)
+            return ans;
+        for(int i=2;i<=46341;i++){  //46340 *46340 is maximum that integer can store , 46341*46341 is out of int range
+            if(i > 46340){
+                return ans;
+            }
+            if( i*i > x){           // or we can explicitly convert i from int to long long if((long long)i*i > x)
+                return ans;
+            }
+            if(i*i == x){
+                ans = i;
+                return ans;
+            }
+            if(i*i < x)
+            {
+                ans = i;
+            }
+        }
+        return ans;
+    }
+};
