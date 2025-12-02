@@ -1,0 +1,61 @@
+83. Remove Duplicates from Sorted List
+Solved
+Given the head of a sorted linked list, delete all duplicates such that each element appears only once. Return the linked list sorted as well.
+
+Example 1:
+1 -> 1 -> 2 ======> 1 -> 2
+Input: head = [1,1,2]
+Output: [1,2]
+
+Example 2:
+1 -> 1 -> 2 -> 3 -> 3 =======> 1 -> 2 -> 3
+Input: head = [1,1,2,3,3]
+Output: [1,2,3]
+
+Constraints:
+
+The number of nodes in the list is in the range [0, 300].
+-100 <= Node.val <= 100
+The list is guaranteed to be sorted in ascending order.
+
+Approach:
+i have two options to remove duplicate node by:  1) remove the nearest node from head 
+                                                 2) remove the farest node from head
+the extra work with 1st way is if first node is duplicate we have to change head also.
+so, i apply 2nd way where i created two pointers tmp and tmp1 where i initialsed tmp with head and tmp1 with tmp->next and use while loop for comparison and either tmp->val is equal to tmp1->val or not equal to tmp1->val
+if tmp->val == tmp1->val in that case i have to remove the farest node from head so, overwrite tmp->next with tmp1->next by this now tmp1 node can't be access by head;
+if tmp->val != tmp1->val movee tmp = tmp->next;
+i move pointer tmp1 to tmp1->next
+after loop termination i get unique values Linked List node with sorted manner
+
+Solution:
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+class Solution {
+public:
+    ListNode* deleteDuplicates(ListNode* head) {
+        if( head == nullptr || head->next == nullptr)
+            return head;
+        ListNode *tmp = head;
+        ListNode *tmp1 = tmp->next;
+        while(tmp1 != nullptr){
+            if( tmp->val == tmp1->val )
+                tmp->next = tmp1->next;
+            else{
+                tmp = tmp->next;
+            }
+            
+            tmp1 = tmp1->next;
+        }
+        return head;
+        
+    }
+};
